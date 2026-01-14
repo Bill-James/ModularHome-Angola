@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ModularHome Angola - Casas Modulares Personalizáveis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23334155" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #ff6b35;
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,53,0.4);
+        }
+        
+        .cta-button:hover {
+            background: #ff5520;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,107,53,0.6);
+        }
+        
+        .whatsapp-button {
+            background: #25D366;
+            margin-left: 1rem;
+        }
+        
+        .whatsapp-button:hover {
+            background: #20BA5A;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #ff6b35;
+        }
+        
+        .packages {
+            background: #f8f9fa;
+        }
+        
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card.featured {
+            border: 3px solid #ff6b35;
+            transform: scale(1.05);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #ff6b35;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .package-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .price-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .package-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .package-features li:before {
+            content: "✓ ";
+            color: #25D366;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            height: 250px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .process {
+            background: #1a1a1a;
+            color: white;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            background: #ff6b35;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .faq {
+            background: white;
+        }
+        
+        .faq-item {
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-section {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff5520 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .contact-section h2 {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+        }
+        
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .package-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">ModularHome Angola</div>
+            <a href="#contacto" class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 1rem;">Contactar</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Casa Pronta em 1 Dia!</h1>
+        <p>Casas modulares personalizáveis de 20 pés - completas com banheiro, cozinha e quarto. Instalação rápida, qualidade garantida.</p>
+        <a href="#pacotes" class="cta-button">Ver Pacotes</a>
+        <a href="https://wa.me/244923881741" class="cta-button whatsapp-button">WhatsApp</a>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Por Que Escolher ModularHome?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instalação Rápida</h3>
+                <p>Casa completa instalada em apenas 4-6 horas. Não precisa esperar meses!</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>100% Personalizável</h3>
+                <p>Escolha cores, layout e acabamentos. Sua casa do seu jeito.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💪</div>
+                <h3>Durável e Resistente</h3>
+                <p>Estrutura de aço com painéis EPS. Resistente a intempéries e cupins.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Tudo Incluído</h3>
+                <p>Banheiro completo, cozinha equipada, instalação elétrica e hidráulica.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="packages">
+        <div class="container">
+            <h2 class="section-title">Escolha Seu Pacote</h2>
+            <div class="package-grid">
+                <div class="package-card">
+                    <h3>BÁSICO</h3>
+                    <div class="price">9.500.000</div>
+                    <div class="price-subtitle">Kz (entrada 50%)</div>
+                    <ul class="package-features">
+                        <li>Casa padrão 20 pés (7m×2,4m)</li>
+                        <li>Banheiro completo</li>
+                        <li>Cozinha com pia dupla</li>
+                        <li>Instalação incluída</li>
+                        <li>Garantia 1 ano</li>
+                        <li>Cor padrão (cinza/branco)</li>
+                    </ul>
+                    <a href="https://wa.me/244923881741?text=Olá! Tenho interesse no pacote BÁSICO" class="cta-button" style="padding: 0.8rem 2rem; font-size: 1rem;">Solicitar</a>
+                </div>
+
+                <div class="package-card featured">
+                    <div class="badge">POPULAR</div>
+                    <h3>COMPLETO</h3>
+                    <div class="price">14.500.000</div>
+                    <div class="price-subtitle">Kz (entrada 50%)</div>
+                    <ul class="package-features">
+                        <li>Tudo do pacote Básico +</li>
+                        <li>Customização de cores</li>
+                        <li>Mobília básica incluída</li>
+                        <li>Nivelamento do terreno</li>
+                        <li>Garantia 2 anos</li>
+                        <li>Suporte pós-venda prioritário</li>
+                    </ul>
+                    <a href="https://wa.me/244923881741?text=Olá! Tenho interesse no pacote COMPLETO" class="cta-button" style="padding: 0.8rem 2rem; font-size: 1rem;">Solicitar</a>
+                </div>
+
+                <div class="package-card">
+                    <h3>PREMIUM</h3>
+                    <div class="price">18.000.000+</div>
+                    <div class="price-subtitle">Kz (entrada 50%)</div>
+                    <ul class="package-features">
+                        <li>Tudo do pacote Completo +</li>
+                        <li>Design 100% personalizado</li>
+                        <li>Mobília completa premium</li>
+                        <li>Sistema solar opcional</li>
+                        <li>Tanque de água 500L</li>
+                        <li>Garantia 3 anos</li>
+                        <li>Manutenção gratuita 1º ano</li>
+                    </ul>
+                    <a href="https://wa.me/244923881741?text=Olá! Tenho interesse no pacote PREMIUM" class="cta-button" style="padding: 0.8rem 2rem; font-size: 1rem;">Solicitar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">Galeria de Projetos</h2>
+        <div class="gallery">
+            <div class="gallery-item">Exterior - Vista frontal</div>
+            <div class="gallery-item">Quarto equipado</div>
+            <div class="gallery-item">Banheiro moderno</div>
+            <div class="gallery-item">Cozinha funcional</div>
+            <div class="gallery-item">Sala de estar</div>
+            <div class="gallery-item">Vista completa</div>
+        </div>
+        <p style="text-align: center; margin-top: 2rem; color: #666;">
+            <em>Imagens ilustrativas. Solicite fotos reais dos nossos projetos via WhatsApp.</em>
+        </p>
+    </section>
+
+    <section class="process">
+        <div class="container">
+            <h2 class="section-title">Como Funciona?</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Contacto</h3>
+                    <p>Fale conosco via WhatsApp ou telefone</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Orçamento</h3>
+                    <p>Receba proposta personalizada em 24h</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Sinal 50%</h3>
+                    <p>Confirme o pedido com entrada</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Produção</h3>
+                    <p>15-25 dias de fabricação</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Envio</h3>
+                    <p>30-45 dias via transporte marítimo</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <h3>Instalação</h3>
+                    <p>Montagem em 1 dia no seu terreno</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <div class="faq-question">Quanto tempo dura a casa?</div>
+                <div>Com manutenção adequada, mais de 20 anos. A estrutura de aço é tratada contra corrosão.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Preciso de fundação?</div>
+                <div>Apenas nivelamento básico do terreno. A casa pode ser instalada sobre blocos de concreto.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Qual o prazo total de entrega?</div>
+                <div>Em média 60-75 dias desde o pedido até instalação completa.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Posso expandir depois?</div>
+                <div>Sim! As casas podem ser conectadas para criar espaços maiores.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Aceita financiamento?</div>
+                <div>Trabalhamos com sinal de 50% e o restante na entrega. Consulte-nos sobre parcelamento.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <h2>Pronto Para Ter Sua Casa?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Entre em contacto e receba um orçamento personalizado em 24 horas</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div>
+                        <strong>WhatsApp</strong><br>
+                        +244 923 881 741  
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <strong>Email</strong><br>
+                        info@modularhome.ao
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <strong>Localização</strong><br>
+                        Luanda, Angola
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 3rem;">
+                <a href="https://wa.me/244923881741" class="cta-button whatsapp-button" style="font-size: 1.3rem;">Contactar Agora via WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 ModularHome Angola. Todos os direitos reservados.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Casas modulares personalizáveis para Angola</p>
+    </footer>
+</body>
+</html>
